@@ -1,28 +1,28 @@
-@use "sass:color" as color;
+@use "sass:color";
 
-// Modern color variables using CSS native variables
-:root {
-  --primary-green: #00d09c;
-  --primary-dark: #0f4a3a;
-  --dark-bg: #1e2228;
-  --card-bg: #2a2f36;
-}
+// Groww Color Palette using modern Sass
+$primary-green: #00d09c;
+$dark-bg: #1e2228;
 
-// Using modern Sass modules
+// Modern color functions
 .primary-btn {
-  background-color: var(--primary-green);
-  transition: background-color 0.3s ease;
-
+  background-color: $primary-green;
+  
   &:hover {
-    background-color: color.scale(#00d09c, $lightness: -10%);
+    background-color: color.scale($primary-green, $lightness: -10%);
   }
 }
 
 .card {
-  background-color: var(--card-bg);
-  border-radius: 8px;
-
+  background-color: $dark-bg;
+  
   &:hover {
-    background-color: color.mix(#2a2f36, #ffffff, 90%);
+    background-color: color.scale($dark-bg, $lightness: 5%);
   }
+}
+
+// CSS Variables for better theming
+:root {
+  --primary-green: #{$primary-green};
+  --dark-bg: #{$dark-bg};
 }
