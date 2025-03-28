@@ -1,0 +1,71 @@
+
+=== src/services/api.js ===
+
+=== src/App.js ===
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Dashboard, Portfolio, Markets } from './pages';
+import { Navbar, Sidebar } from './components';
+
+function App() {
+
+=== src/pages/Dashboard.jsx ===
+
+=== src/components/StockCard.jsx ===
+import { Card, CardContent, Typography, Button } from '@mui/material';
+
+export default function StockCard({ stock }) {
+  return (
+    <Card>
+
+=== src/store/store.js ===
+
+=== src/store/portfolioReducer.js ===
+const initialState = {
+  holdings: [],
+  watchlist: [],
+  loading: false,
+  error: null
+
+=== src/store/actions/authActions.js ===
+export const login = (credentials) => async (dispatch) => {
+  dispatch({ type: 'LOGIN_REQUEST' });
+  try {
+    const response = await axios.post('/api/auth/login', credentials);
+    dispatch({ type: 'LOGIN_SUCCESS', payload: response.data });
+
+=== src/store/actions/portfolioActions.js ===
+export const fetchPortfolio = () => async (dispatch) => {
+  dispatch({ type: 'FETCH_PORTFOLIO_REQUEST' });
+  const response = await axios.get('/api/portfolio');
+  dispatch({ type: 'FETCH_PORTFOLIO_SUCCESS', payload: response.data });
+};
+
+=== src/store/authReducer.js ===
+const initialState = {
+  user: null,
+  token: null,
+  loading: false,
+  error: null
+
+=== src/store/marketDataReducer.js ===
+const initialState = {
+  stocks: [],
+  mutualFunds: [],
+  goldPrice: 0,
+  loading: false
+
+=== src/store/apiSlice.js ===
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+
+export const apiSlice = createApi({
+  reducerPath: 'api',
+  baseQuery: fetchBaseQuery({ baseUrl: '/api' }),
+
+=== src/assets/styles/main.scss ===
+
+=== src/index.js ===
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './App';
+import reportWebVitals from './reportWebVitals';

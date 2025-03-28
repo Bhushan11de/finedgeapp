@@ -1,1 +1,1 @@
-# finedgeapp
+# Groww Clone - Investment Platform

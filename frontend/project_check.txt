@@ -1,0 +1,145 @@
+
+=== src/services/api.js ===
+import axios from 'axios';
+
+const api = axios.create({
+  baseURL: process.env.REACT_APP_API_URL || 'http://localhost:5000/api',
+});
+
+=== src/App.js ===
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Dashboard from './pages/Dashboard';
+import Portfolio from './pages/Portfolio';
+import Markets from './pages/Markets';
+import Login from './pages/Login';
+
+=== src/pages/Register.jsx ===
+
+=== src/pages/Dashboard.jsx ===
+import React, { useEffect } from 'react';
+import { 
+  Grid, 
+  Box, 
+  Typography, 
+
+=== src/pages/Login.jsx ===
+import React, { useState } from 'react';
+import { TextField, Button, Container, Typography } from '@mui/material';
+import { login } from '../store/actions/authActions';
+import { useDispatch } from 'react-redux';
+
+
+=== src/pages/Portfolio.jsx ===
+
+=== src/pages/Markets.jsx ===
+
+=== src/theme.js ===
+import { createTheme } from '@mui/material/styles';
+
+const theme = createTheme({
+  palette: {
+    mode: 'dark',
+
+=== src/components/Watchlist.jsx ===
+
+=== src/components/Navbar.jsx ===
+import { AppBar, Toolbar, Typography } from '@mui/material';
+
+export default function Navbar() {
+  return (
+    <AppBar position="static">
+
+=== src/components/MarketTrends.jsx ===
+import React from 'react';
+import { Card, CardContent, Typography } from '@mui/material';
+import { Line } from 'react-chartjs-2';
+import {
+  Chart as ChartJS,
+
+=== src/components/StockCard.jsx ===
+import { Card, CardContent, Typography, Button } from '@mui/material';
+
+export default function StockCard({ stock }) {
+  return (
+    <Card>
+
+=== src/components/PortfolioSummary.jsx ===
+
+=== src/components/Sidebar.jsx ===
+
+=== src/reportWebVitals.js ===
+const reportWebVitals = (onPerfEntry) => {
+  if (onPerfEntry && onPerfEntry instanceof Function) {
+    import('web-vitals').then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {
+      getCLS(onPerfEntry);  // Cumulative Layout Shift
+      getFID(onPerfEntry);  // First Input Delay
+
+=== src/store/store.js ===
+import { configureStore } from '@reduxjs/toolkit';
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+
+=== src/store/portfolioReducer.js ===
+const initialState = {
+  holdings: [],
+  watchlist: [],
+  loading: false,
+  error: null
+
+=== src/store/actions/authActions.js ===
+export const login = (credentials) => async (dispatch) => {
+  dispatch({ type: 'LOGIN_REQUEST' });
+  try {
+    const response = await axios.post('/api/auth/login', credentials);
+    dispatch({ type: 'LOGIN_SUCCESS', payload: response.data });
+
+=== src/store/actions/portfolioActions.js ===
+import { portfolioAPI } from '../../services/api';
+
+export const fetchPortfolio = () => async (dispatch) => {
+  dispatch({ type: 'FETCH_PORTFOLIO_REQUEST' });
+  try {
+
+=== src/store/reducers/index.js ===
+import { combineReducers } from 'redux';
+import auth from './authReducer';
+import portfolio from './portfolioReducer';
+import marketData from './marketDataReducer';
+
+
+=== src/store/authReducer.js ===
+const initialState = {
+  user: null,
+  token: null,
+  loading: false,
+  error: null
+
+=== src/store/marketDataReducer.js ===
+const initialState = {
+  stocks: [],
+  mutualFunds: [],
+  goldPrice: 0,
+  loading: false
+
+=== src/store/apiSlice.js ===
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+
+export const apiSlice = createApi({
+  reducerPath: 'api',
+  baseQuery: fetchBaseQuery({ 
+
+=== src/assets/styles/main.scss ===
+// Groww Color Palette
+$primary-green: #00d09c;
+$primary-dark: #0f4a3a;
+$dark-bg: #1e2228;
+$card-bg: #2a2f36;
+
+=== src/index.js ===
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './assets/styles/main.scss';
+import App from './App';
+import { Provider } from 'react-redux';

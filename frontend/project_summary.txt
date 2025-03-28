@@ -1,0 +1,96 @@
+
+=== src/services/api.js ===
+import axios from 'axios';
+
+const api = axios.create({
+
+=== src/App.js ===
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Dashboard from './pages/Dashboard';
+import Portfolio from './pages/Portfolio';
+
+=== src/pages/Register.jsx ===
+
+=== src/pages/Dashboard.jsx ===
+import React, { useEffect } from 'react';
+import { 
+  Grid, 
+
+=== src/pages/Login.jsx ===
+
+=== src/pages/Portfolio.jsx ===
+
+=== src/pages/Markets.jsx ===
+
+=== src/theme.js ===
+import { createTheme } from '@mui/material/styles';
+
+const theme = createTheme({
+
+=== src/components/Watchlist.jsx ===
+
+=== src/components/Navbar.jsx ===
+import { AppBar, Toolbar, Typography } from '@mui/material';
+
+export default function Navbar() {
+
+=== src/components/MarketTrends.jsx ===
+
+=== src/components/StockCard.jsx ===
+import { Card, CardContent, Typography, Button } from '@mui/material';
+
+export default function StockCard({ stock }) {
+
+=== src/components/PortfolioSummary.jsx ===
+
+=== src/components/Sidebar.jsx ===
+
+=== src/reportWebVitals.js ===
+const reportWebVitals = (onPerfEntry) => {
+  if (onPerfEntry && onPerfEntry instanceof Function) {
+    import('web-vitals').then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {
+
+=== src/store/store.js ===
+import { configureStore } from '@reduxjs/toolkit';
+import {
+  persistStore,
+
+=== src/store/portfolioReducer.js ===
+const initialState = {
+  holdings: [],
+  watchlist: [],
+
+=== src/store/actions/authActions.js ===
+export const login = (credentials) => async (dispatch) => {
+  dispatch({ type: 'LOGIN_REQUEST' });
+  try {
+
+=== src/store/actions/portfolioActions.js ===
+import { portfolioAPI } from '../../services/api';
+
+export const fetchPortfolio = () => async (dispatch) => {
+
+=== src/store/authReducer.js ===
+const initialState = {
+  user: null,
+  token: null,
+
+=== src/store/marketDataReducer.js ===
+const initialState = {
+  stocks: [],
+  mutualFunds: [],
+
+=== src/store/apiSlice.js ===
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+
+export const apiSlice = createApi({
+
+=== src/assets/styles/main.scss ===
+// Groww Color Palette
+$primary-green: #00d09c;
+$primary-dark: #0f4a3a;
+
+=== src/index.js ===
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './assets/styles/main.scss';
