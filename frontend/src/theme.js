@@ -1,40 +1,45 @@
 import { createTheme } from '@mui/material/styles';
 
-const theme = createTheme({
+export default createTheme({
   palette: {
     mode: 'dark',
     primary: {
-      main: '#00d09c', // Groww का हरा रंग
-      contrastText: '#000',
-    },
-    secondary: {
-      main: '#2a2f36', // कार्ड बैकग्राउंड
+      main: '#00d09c',
+      contrastText: '#fff'
     },
     background: {
-      default: '#1e2228', // मुख्य बैकग्राउंड
-      paper: '#2a2f36',   // कार्ड/पेपर बैकग्राउंड
+      default: '#1e2228',
+      paper: '#2a2f36'
     },
     text: {
-      primary: '#ffffff', // मुख्य टेक्स्ट
-      secondary: '#b2b2b2' // सेकेंडरी टेक्स्ट
-    },
-    error: {
-      main: '#ff4d4d' // एरर रंग
+      primary: '#ffffff',
+      secondary: '#bdbdbd'
     }
   },
   typography: {
-    fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
-    h1: {
-      fontSize: '2.5rem',
-      fontWeight: 500
-    },
-    button: {
-      textTransform: 'none' // बटन टेक्स्ट uppercase नहीं होगा
+    fontFamily: '"Inter", sans-serif',
+    h4: {
+      fontWeight: 600,
+      color: '#00d09c'
     }
   },
-  shape: {
-    borderRadius: 8 // डिफॉल्ट बॉर्डर रेडियस
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          borderRadius: 8,
+          textTransform: 'none',
+          padding: '8px 16px'
+        }
+      }
+    },
+    MuiCard: {
+      styleOverrides: {
+        root: {
+          borderRadius: 12,
+          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)'
+        }
+      }
+    }
   }
 });
-
-export default theme;

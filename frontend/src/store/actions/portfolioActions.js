@@ -1,20 +1,18 @@
-import { portfolioAPI } from '../../services/api';
-
-export const fetchPortfolio = () => async (dispatch) => {
-  dispatch({ type: 'FETCH_PORTFOLIO_REQUEST' });
+export const addToWatchlist = (stock) => async (dispatch) => {
   try {
-    const response = await portfolioAPI.getHoldings();
-    dispatch({ type: 'FETCH_PORTFOLIO_SUCCESS', payload: response.data });
+    const response = await portfolioAPI.post('/watchlist', { stock });
+    dispatch({ type: 'ADD_TO_WATCHLIST', payload: response.data });
   } catch (error) {
     dispatch({ type: 'PORTFOLIO_ERROR', payload: error.message });
   }
 };
 
-export const addToPortfolio = (investment) => async (dispatch) => {
+export const buyStock = (stock, quantity) => async (dispatch) => {
+  dispatch({ type: 'BUY_STOCK_REQUEST' });
   try {
-    const response = await portfolioAPI.addInvestment(investment);
-    dispatch({ type: 'ADD_TO_PORTFOLIO', payload: response.data });
+    const response = await portfolioAPI.post('/transactions/buy', { stock, quantity });
+    dispatch({ type: 'BUY_STOCK_SUCCESS', payload: response.data });
   } catch (error) {
-    dispatch({ type: 'PORTFOLIO_ERROR', payload: error.message });
+    dispatch({ type: 'BUY_STOCK_FAILURE', payload: error.message });
   }
 };

@@ -1,6 +1,5 @@
-import React from 'react';
-import { Card, CardContent, Typography } from '@mui/material';
 import { Line } from 'react-chartjs-2';
+import { Card, CardContent, Typography } from '@mui/material';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -22,26 +21,24 @@ ChartJS.register(
   Legend
 );
 
-export default function MarketTrends({ data }) {
-  const chartData = {
-    labels: data?.stocks?.map(stock => stock.symbol) || [],
-    datasets: [
-      {
-        label: 'Current Price',
-        data: data?.stocks?.map(stock => stock.price) || [],
-        borderColor: '#00d09c',
-        tension: 0.1
-      }
-    ]
-  };
+const data = {
+  labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+  datasets: [{
+    label: 'Nifty 50',
+    data: [17000, 17400, 17200, 17800, 18200],
+    borderColor: '#00d09c',
+    tension: 0.1
+  }]
+};
 
+export default function MarketTrends() {
   return (
     <Card>
       <CardContent>
-        <Typography variant="h6">Market Trends</Typography>
-        <div style={{ height: '300px' }}>
-          <Line data={chartData} />
-        </div>
+        <Typography variant="h6" gutterBottom>
+          Market Trends
+        </Typography>
+        <Line data={data} />
       </CardContent>
     </Card>
   );

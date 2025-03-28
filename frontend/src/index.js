@@ -5,16 +5,12 @@ import App from './App';
 import { Provider } from 'react-redux';
 import { persistor, store } from './store/store';
 import { PersistGate } from 'redux-persist/integration/react';
-import reportWebVitals from './reportWebVitals';
-import ErrorBoundary from './components/ErrorBoundary';
 import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from './theme';
 import CssBaseline from '@mui/material/CssBaseline';
-import theme from './theme'; // बिना .js एक्सटेंशन के
 import reportWebVitals from './reportWebVitals';
 
-// Create a class component for error boundary
 class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
@@ -27,18 +23,38 @@ class ErrorBoundary extends React.Component {
 
   componentDidCatch(error, errorInfo) {
     console.error('Error caught by boundary:', error, errorInfo);
+    // Consider sending error to error tracking service (e.g., Sentry)
   }
 
   render() {
     if (this.state.hasError) {
       return (
-        <div style={{ padding: '20px', textAlign: 'center' }}>
+        <div style={{ 
+          padding: '20px', 
+          textAlign: 'center',
+          color: theme.palette.text.primary,
+          backgroundColor: theme.palette.background.default,
+          minHeight: '100vh',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center'
+        }}>
           <h1>Something went wrong</h1>
           <p>Please refresh the page or try again later</p>
+          <button 
+            onClick={() => window.location.reload()}
+            style={{
+              marginTop: '20px',
+              padding: '10px 20px',
+              cursor: 'pointer'
+            }}
+          >
+            Refresh Page
+          </button>
         </div>
       );
     }
-    return this.props.children; 
+    return this.props.children;
   }
 }
 
@@ -63,5 +79,5 @@ root.render(
 
 // Performance measurement
 if (process.env.NODE_ENV === 'production') {
-  reportWebVitals(console.log);
+  reportWebVitals();
 }
