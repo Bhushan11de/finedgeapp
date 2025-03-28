@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
+import { CircularProgress, Grid, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import { Grid, Typography } from '@mui/material';
+import { useEffect } from 'react';
 import { fetchMarketData } from '../store/actions/marketActions';
 import StockCard from '../components/StockCard';
 
@@ -12,8 +12,10 @@ export default function Markets() {
     dispatch(fetchMarketData());
   }, [dispatch]);
 
+  if (loading) return <CircularProgress />;
+
   return (
-    <div>
+    <div style={{ padding: '20px' }}>
       <Typography variant="h4" gutterBottom>Market Overview</Typography>
       <Grid container spacing={3}>
         {stocks.map(stock => (
